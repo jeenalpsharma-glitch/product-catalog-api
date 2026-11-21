@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Digits;
+import com.example.product_catalog_api.entity.Product.ProductStatus;
 
 public class CreateProductRequest {
     @NotBlank
@@ -26,6 +27,7 @@ public class CreateProductRequest {
     @NotNull
     @Min(0)
     private Integer quantity;
+    private ProductStatus status;
 
     public String getSku() {
         return sku;
@@ -65,6 +67,14 @@ public class CreateProductRequest {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProductStatus status) {
+        this.status = status;
     }
 
 }
