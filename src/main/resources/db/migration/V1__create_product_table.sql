@@ -1,0 +1,12 @@
+CREATE TABLE product (
+	id UUID,
+	sku VARCHAR(32) UNIQUE NOT NULL,
+	name VARCHAR(120) NOT NULL,
+	description VARCHAR(1000),
+	price DECIMAL(10,2) CHECK (price >= 0) NOT NULL,
+	quantity INT CHECK (quantity >= 0) NOT NULL,
+	status VARCHAR(12) CHECK (status in ('ACTIVE', 'DISCONTINUED')) DEFAULT 'ACTIVE' NOT NULL,
+	createdAT TIMESTAMP,
+	updatedAT TIMESTAMP,
+	PRIMARY KEY(id)
+);
