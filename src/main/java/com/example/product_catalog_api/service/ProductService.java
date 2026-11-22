@@ -7,6 +7,9 @@ import com.example.product_catalog_api.dto.ProductResponse;
 import com.example.product_catalog_api.dto.PatchProductRequest;
 import java.util.UUID;
 import com.example.product_catalog_api.entity.Product;
+import com.example.product_catalog_api.exception.DuplicateSkuException;
+import com.example.product_catalog_api.exception.ProductNotFoundException;
+
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,7 @@ public class ProductService {
 
     public ProductResponse createProduct(CreateProductRequest request) {
         if (productRepository.existsBySku(request.getSku())) {
-            throw new IllegalArgumentException("SKU already exists");
+            throw new DuplicateSkuException("SKU already exists");
         }
         UUID newId = UUID.randomUUID();
         Product product = new Product(newId);
@@ -40,7 +43,7 @@ public class ProductService {
     public ProductResponse getProductById(UUID id) {
         Optional<Product> result = productRepository.findById(id);
         if (result.isEmpty()) {
-            throw new IllegalArgumentException("Product doesn't exist");
+            throw new ProductNotFoundException("Product doesn't exist");
         }
         Product product = result.get();
         return new ProductResponse(product);
@@ -60,12 +63,12 @@ public class ProductService {
     public ProductResponse updateProduct(UUID id, CreateProductRequest request) {
         Optional<Product> result = productRepository.findById(id);
         if (result.isEmpty()) {
-            throw new IllegalArgumentException("Product doesn't exist");
+            throw new ProductNotFoundException("Product doesn't exist");
         }
         Product product = result.get();
         if (!product.getSku().equals(request.getSku())
                 && productRepository.existsBySku(request.getSku())) {
-            throw new IllegalArgumentException("SKU already exists");
+            throw new DuplicateSkuException("SKU already exists");
         }
         product.setSku(request.getSku());
         product.setName(request.getName());
@@ -83,7 +86,7 @@ public class ProductService {
     public void deleteProduct(UUID id) {
         Optional<Product> result = productRepository.findById(id);
         if (result.isEmpty()) {
-            throw new IllegalArgumentException("Product doesn't exist");
+            throw new ProductNotFoundException("Product doesn't exist");
         }
         productRepository.deleteById(id);
     }
@@ -91,12 +94,12 @@ public class ProductService {
     public ProductResponse patchProduct(UUID id, PatchProductRequest request) {
         Optional<Product> result = productRepository.findById(id);
         if (result.isEmpty()) {
-            throw new IllegalArgumentException("Product doesn't exist");
+            throw new ProductNotFoundException("Product doesn't exist");
         }
         Product product = result.get();
         if (request.getSku() != null && !product.getSku().equals(request.getSku())
                 && productRepository.existsBySku(request.getSku())) {
-            throw new IllegalArgumentException("SKU already exists");
+            throw new DuplicateSkuException("SKU already exists");
         }
         if (request.getSku() != null) {
             product.setSku(request.getSku());
