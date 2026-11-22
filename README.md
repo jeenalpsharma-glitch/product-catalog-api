@@ -26,30 +26,42 @@ My Product Catalog REST API is a backend application designed to manage a produc
 - Unit testing with JUnit and Mockito
 
 
-### Run with Docker Compose
+## Run with Docker
 
-Once `Dockerfile`, `compose.yaml`, and the database environment variables are configured:
+The application is containerized and published on Docker Hub.
+
+**Docker Image:** [shar0477/product-catalog-api](https://hub.docker.com/r/shar0477/product-catalog-api)
+
+### Prerequisites
+
+- Docker Desktop with Docker Compose
+
+### 3. Start the Application
 
 ```bash
-docker compose up --build -d
+docker compose up -d
 ```
 
-Check container status and logs:
+Docker Compose automatically pulls the application image and starts the Spring Boot API alongside PostgreSQL.
+
+The API runs at:
+
+`http://localhost:8080`
+
+### 4. Check Container Status and Logs
 
 ```bash
 docker compose ps
 docker compose logs -f app
 ```
 
-Stop services:
+### 5. Stop the Application
 
 ```bash
 docker compose down
 ```
 
 ## Testing
-
-Run the test suite:
 
 ```bash
 ./mvnw test
