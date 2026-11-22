@@ -1,8 +1,7 @@
 # Product Catalog REST API
 
 ## Overview
-
-My Product Catalog REST API is a backend application designed to manage a product catalog through a RESTful interface. It focuses on maintainable service-layer logic, data validation, persistence, and reliable testing.
+Product Catalog REST API is a backend application designed to manage a product catalog through a RESTful interface. It focuses on maintainable service-layer logic, data validation, persistence, and reliable testing.
 
 
 ## Tech Stack
