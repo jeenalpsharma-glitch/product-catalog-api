@@ -3,9 +3,26 @@ POST http://localhost:8080/api/v1/products
 Content-Type: application/json
 
 {
-  "sku": "LAPTOP-003",
+  "sku": "LAPTOP-004",
   "name": "MacBook Pro",
   "description": "14-inch laptop",
-  "price": "1499.99",
+  "price": -1499.99,
   "quantity": 5
 }
+
+### Update Product
+PATCH http://localhost:8080/api/v1/products/4f87ef0e-5230-414d-8122-b0027675de91
+Content-Type: application/json
+
+{
+  "name": "Macbook Air",
+  "status": "DISCONTINUED"
+}
+
+
+### Delete Product
+DELETE http://localhost:8080/api/v1/products/2d05785c-fd0b-479e-a565-47d5a534bad2
+Content-Type: application/json
+
+### Retrieve Product
+GET http://localhost:8080/api/v1/products
